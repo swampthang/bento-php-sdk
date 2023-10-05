@@ -10,4 +10,5 @@ abstract class BentoCommandTypes
   const REMOVE_TAG = 'remove_tag';
   const SUBSCRIBE = 'subscribe';
   const UNSUBSCRIBE = 'unsubscribe';
+  const CHANGE_EMAIL = 'change_email';
 }

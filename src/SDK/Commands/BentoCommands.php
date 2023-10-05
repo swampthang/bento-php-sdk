@@ -190,6 +190,35 @@ class BentoCommands
     }
   }
 
+    /**
+     * **This does not trigger automations!** - If you wish to trigger automations, please use the
+     * core module's `updateFields` method.
+     *
+     * Adds a field to the subscriber with the matching email.
+     *
+     * Note that both the field and the subscriber will be created if either is missing
+     * from system.
+     *
+     * @param mixed $parameters
+     * @returns mixed
+     */
+    public function changeEmail($parameters)
+    {
+        $response = $this->_constructCommandsResult($this->_client->post($this->_url, [
+            'command' => [
+                'command' => BentoCommandTypes::CHANGE_EMAIL,
+                'email' => $parameters['old_email'],
+                'query' => $parameters['new_email'],
+            ]
+        ]));
+
+        if ($response != null) {
+            return $response;
+        } else {
+            throw new \Exception('[BentoCommands] Error adding fields to subscriber: ' . $parameters['email']);
+        }
+    }
+
   private function _constructCommandsResult($response)
   {
     $decodedResponse = json_decode($response->getBody(), true);
