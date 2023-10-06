@@ -201,6 +201,7 @@ class BentoCommands
      *
      * @param mixed $parameters
      * @returns mixed
+     * @throws \Exception
      */
     public function changeEmail($parameters)
     {
@@ -215,7 +216,7 @@ class BentoCommands
         if ($response != null) {
             return $response;
         } else {
-            throw new \Exception('[BentoCommands] Error adding fields to subscriber: ' . $parameters['email']);
+            throw new \Exception('[BentoCommands] Error updating email ' . $parameters['old_email'] . ' to ' . $parameters['new_email']);
         }
     }
 
