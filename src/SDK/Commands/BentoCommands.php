@@ -213,7 +213,7 @@ class BentoCommands
             ]
         ]));
 
-        if ($response != null) {
+        if ($response) {
             return $response;
         } else {
             throw new \Exception('[BentoCommands] Error updating email ' . $parameters['old_email'] . ' to ' . $parameters['new_email']);
