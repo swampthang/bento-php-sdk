@@ -5,12 +5,14 @@ namespace bentonow\Bento\Versions;
 use bentonow\Bento\SDK\BentoClient;
 use bentonow\Bento\SDK\Batch\BentoBatch;
 use bentonow\Bento\SDK\Batch\BentoEvents;
+use bentonow\Bento\SDK\Events\BentoPeopleEvents;
 use bentonow\Bento\SDK\Commands\BentoCommands;
 use bentonow\Bento\SDK\Experimental\BentoExperimental;
 use bentonow\Bento\SDK\Fields\BentoFields;
 use bentonow\Bento\SDK\Forms\BentoForms;
 use bentonow\Bento\SDK\Subscribers\BentoSubscribers;
 use bentonow\Bento\SDK\Tags\BentoTags;
+use bentonow\Bento\SDK\Emails\BentoEmails;
 
 class BentoAPIV1
 {
@@ -35,6 +37,20 @@ class BentoAPIV1
    * @var \bentonow\Bento\SDK\Commands\BentoCommands
    */
   private $_commands;
+
+  /**
+  * The BentoEmails to use.
+  *
+  * @var \bentonow\Bento\SDK\Emails\BentoEmails
+  */
+  private $_emails;
+
+  /**
+  * The BentoEvents to use.
+  *
+  * @var \bentonow\Bento\SDK\Events\BentoPeopleEvents
+  */
+  private $_events;
 
   /**
    * The BentoExperimental to use.
@@ -76,6 +92,8 @@ class BentoAPIV1
     $this->_client = new BentoClient($options);
     $this->_batch = new BentoBatch($this->_client);
     $this->_commands = new BentoCommands($this->_client);
+    $this->_emails = new BentoEmails($this->_client);
+    $this->_events = new BentoPeopleEvents($this->_client);
     $this->_experimental = new BentoExperimental($this->_client);
     $this->_fields = new BentoFields($this->_client);
     $this->_forms = new BentoForms($this->_client);
@@ -91,6 +109,14 @@ class BentoAPIV1
 
     if ($name == 'Commands') {
       return $this->_commands;
+    }
+
+    if ($name == 'Emails') {
+      return $this->_emails;
+    }
+
+    if ($name == 'Events') {
+      return $this->_events;
     }
 
     if ($name == 'Experimental') {
